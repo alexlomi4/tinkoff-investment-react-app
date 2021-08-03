@@ -1,0 +1,40 @@
+{
+  "exclude": [
+    "node_modules",
+    "build",
+    "scripts",
+    "acceptance-tests",
+    "webpack",
+    "jest",
+    "src/*.test.js",
+    "src/setupTests.js"
+  ],
+  "include": [
+    "src/**/*"
+  ],
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "build/dist",
+    "module": "esnext",
+    "target": "es5",
+    "allowJs": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "lib": [
+      "es6",
+      "dom"
+    ]
+  },
+}
