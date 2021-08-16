@@ -25,6 +25,8 @@ module.exports = {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx"] }],
     "@typescript-eslint/object-curly-spacing": "off",
     "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
-    "react-hooks/exhaustive-deps": "error" // Checks effect dependencies
+    "react-hooks/exhaustive-deps": "error", // Checks effect dependencies
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error", {functions: false}],
   },
 };

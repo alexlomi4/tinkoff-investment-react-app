@@ -18,7 +18,7 @@
     "module": "esnext",
     "target": "es5",
     "allowJs": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "moduleResolution": "node",
     "noImplicitReturns": true,
     "noImplicitThis": true,
@@ -35,6 +35,7 @@
     "lib": [
       "es6",
       "dom"
-    ]
-  },
+    ],
+    "noEmit": true
+  }
 }

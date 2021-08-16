@@ -14,12 +14,12 @@
 }
 
 .App-header {
+  padding-top: 2%;
+  padding-left: 2%;
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
 }
@@ -46,6 +46,7 @@
 }
 
 .Log-in-button {
+  max-width: 400px;
   height: 40px;
   font-size: large;
 }
@@ -83,4 +84,21 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+
+.Index-column {
+  white-space: nowrap !important;
+}
+
+.Position-Table {
+  margin-top: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.Total-Section {
+  margin-top: 2%;
+  display: flex;
+  flex-direction: row;
 }

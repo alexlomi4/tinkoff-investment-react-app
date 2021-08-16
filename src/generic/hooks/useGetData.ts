@@ -2,7 +2,7 @@ import {useCallback, useEffect, useState} from 'react';
 import useLoadingFlag from './useLoadingFlag';
 
 export default function useGetData<T>(
-  fetchFunction: (...args: any[]) => Promise<any>,
+  fetchFunction: (...args: any[]) => Promise<T>,
   emptyValue: T,
 ): [T, boolean, object | null] {
   const [data, setData] = useState<T>(emptyValue);
