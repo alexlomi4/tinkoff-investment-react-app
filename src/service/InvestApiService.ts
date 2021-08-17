@@ -25,7 +25,7 @@ function convertPositionsToRows(portfolios: PositionMap): PositionRow[] {
   if (!portfolios) {
     return [];
   }
-  return Object.keys(portfolios).map((figi, index) => {
+  return Object.keys(portfolios).map((figi) => {
     const accountPositions = portfolios[figi];
     const {
       instrumentType,
@@ -50,7 +50,6 @@ function convertPositionsToRows(portfolios: PositionMap): PositionRow[] {
       : lastPrice;
 
     return {
-      index,
       name,
       instrumentType,
       lastPrice,

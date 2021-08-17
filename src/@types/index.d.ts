@@ -7,7 +7,6 @@ export declare type LoadingWrapperProps = {
 };
 
 export declare type PositionRow = {
-  index: number,
   name: string,
   instrumentType: string,
   lastPrice?: number,
@@ -21,4 +20,5 @@ export declare type PositionRow = {
   totalNetPercent: number;
 };
 
-export declare type PositionColumnKey = keyof PositionRow;
+export declare type PositionKey = keyof PositionRow;
+export declare type PositionColumn = PositionKey | '#';

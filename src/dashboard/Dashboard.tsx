@@ -9,13 +9,13 @@ import InvestApiService, {
 import useGetData from '../generic/hooks/useGetData';
 import LoadingWrapper from '../generic/components/LoadingWrapper';
 import {PositionsTable, AccountSelector} from './components/index';
-import {PositionColumnKey} from '../@types';
+import {PositionColumn} from '../@types';
 import {Totals} from '../@types/server';
 import {formatPrice} from '../generic/utils';
 import TabWrapper from '../generic/components/TabPanel';
 
-const HISTORY_COLUMNS: PositionColumnKey[] = [
-  'index',
+const HISTORY_COLUMNS: PositionColumn[] = [
+  '#',
   'name',
   'instrumentType',
   'lastPrice',
