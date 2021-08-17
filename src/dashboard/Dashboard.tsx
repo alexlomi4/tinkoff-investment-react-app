@@ -8,8 +8,8 @@ import InvestApiService, {
 } from '../service/InvestApiService';
 import useGetData from '../generic/hooks/useGetData';
 import LoadingWrapper from '../generic/components/LoadingWrapper';
-import {PositionsTable, AccountSelector} from './components';
-import {PositionColumnKey, PositionRow} from '../@types';
+import {PositionsTable, AccountSelector} from './components/index';
+import {PositionColumnKey} from '../@types';
 import {Totals} from '../@types/server';
 import {formatPrice} from '../generic/utils';
 import TabWrapper from '../generic/components/TabPanel';
@@ -50,20 +50,6 @@ function Dashboard() {
     }, [],
   );
 
-  const [currentPositions, loadingPortfolio, loadingPortfolioError] = useGetData<PositionRow[]>(
-    useCallback(() => (
-      InvestApiService.getPortfolios(accountId)
-    ), [accountId]),
-    [],
-  );
-
-  const [historicPositions, loadingHistory, loadingHistoryError] = useGetData<PositionRow[]>(
-    useCallback(() => (
-      InvestApiService.getHistoricPositions(accountId)
-    ), [accountId]),
-    [],
-  );
-
   const [totals, loadingTotals, loadingTotalsError] = useGetData<Totals>(
     useCallback(() => (
       InvestApiService.getTotals(accountId)
@@ -88,17 +74,17 @@ function Dashboard() {
           tabLabels={['Current positions', 'Position history']}
         >
           <PositionsTable
-            positions={currentPositions}
-            loading={loadingPortfolio}
-            loadingError={!!loadingPortfolioError}
             totalPortfolioCostLoading={loadingTotals}
             totalPortfolioCost={portfolioCost}
+            onLoad={useCallback(() => (
+              InvestApiService.getPortfolios(accountId)
+            ), [accountId])}
           />
           <PositionsTable
-            positions={historicPositions}
             columnsToShow={HISTORY_COLUMNS}
-            loading={loadingHistory}
-            loadingError={!!loadingHistoryError}
+            onLoad={useCallback(() => (
+              InvestApiService.getHistoricPositions(accountId)
+            ), [accountId])}
           />
         </TabWrapper>
         <LoadingWrapper loading={loadingTotals} loadingError={!!loadingTotalsError}>

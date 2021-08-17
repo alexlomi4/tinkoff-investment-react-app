@@ -4,7 +4,7 @@ import {Column, Table} from 'react-virtualized';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import {Currency} from '@tinkoff/invest-openapi-js-sdk';
 import InvestApiService from '../../service/InvestApiService';
-import {LoadingWrapperProps, PositionColumnKey, PositionRow} from '../../@types';
+import {PositionColumnKey, PositionRow} from '../../@types';
 import useGetData from '../../generic/hooks/useGetData';
 import LoadingWrapper from '../../generic/components/LoadingWrapper';
 import {CurrencyInfo} from '../../@types/server';
@@ -59,8 +59,7 @@ NetRenderer.defaultProps = {
   cellData: 0,
 };
 
-type PositionTableProps = LoadingWrapperProps & {
-  positions: PositionRow[],
+type PositionTableProps = {
   height?: number,
   rowHeight?: number,
   headerHeight?: number,
@@ -70,6 +69,7 @@ type PositionTableProps = LoadingWrapperProps & {
   title?: string,
   totalPortfolioCost?: number,
   totalPortfolioCostLoading?: boolean,
+  onLoad: () => Promise<PositionRow[]>
 };
 
 PositionsTable.defaultProps = {
@@ -83,18 +83,21 @@ PositionsTable.defaultProps = {
 };
 
 function PositionsTable({
-  positions,
   height,
   rowHeight,
   headerHeight,
   columnsToShow,
   className,
   title,
-  loading,
-  loadingError,
   totalPortfolioCost,
   totalPortfolioCostLoading,
+  onLoad,
 }: PositionTableProps) : JSX.Element {
+  const [positions, loading, loadingError] = useGetData<PositionRow[]>(
+    onLoad,
+    [],
+  );
+
   const currencies = useMemo(() => (
     Array.from(new Set(
       positions.map(({currency}) => currency).filter(Boolean),
@@ -143,7 +146,7 @@ function PositionsTable({
   }, [columnsToShow]);
 
   return (
-    <LoadingWrapper loading={loading} loadingError={loadingError}>
+    <LoadingWrapper loading={loading} loadingError={!!loadingError}>
       <div className={className || 'Position-Table'}>
         {title}
         <Table

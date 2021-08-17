@@ -1,25 +1,43 @@
-import React, {PropsWithChildren} from 'react';
+import React, {
+  PropsWithChildren, useEffect, useState,
+} from 'react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
 type PanelProps = {
   value: number,
   index: number,
+  keepAlive?: boolean,
+};
+
+TabPanel.defaultProps = {
+  keepAlive: true,
 };
 
 function TabPanel({
   value,
   index,
   children,
+  keepAlive,
 }: PropsWithChildren<PanelProps>) {
+  const visible = value === index;
+  const [firstInit, setFirstInit] = useState(true);
+  const renderMemoized = keepAlive && !firstInit;
+
+  useEffect(() => {
+    if (visible) {
+      setFirstInit(false);
+    }
+  }, [visible]);
+
   return (
     <div
       role="tabpanel"
-      hidden={value !== index}
+      hidden={!visible}
       id={`position-table-${index}`}
       aria-labelledby={`position-tab-${index}`}
     >
-      {value === index && children}
+      {(renderMemoized || visible) && children}
     </div>
   );
 }
