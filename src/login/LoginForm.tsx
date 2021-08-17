@@ -9,6 +9,7 @@ type Props = {
 };
 
 export const TOKEN = 'auth_token';
+
 const TOKEN_TIME = 'token_TIME';
 const MS_IN_SEC = 1e3;
 const SEC_IN_MIN = 60;
@@ -26,8 +27,8 @@ function useAuthToken(onLogin: (token: string) => unknown): [boolean, string, To
   useEffect(() => {
     if (isOldTokenValidRef.current) {
       onLogin(oldTokenRef.current);
-      setTokenRestoring(false);
     }
+    setTokenRestoring(false);
   }, [onLogin, oldTokenRef]);
 
   const onNewToken = useCallback<TokenCallback>((newToken) => {

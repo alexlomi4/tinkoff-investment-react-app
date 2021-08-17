@@ -43,7 +43,7 @@ function NetRenderer({
   cellData: totalNet,
   rowData,
 }: TotalNetRendererProps) {
-  if (!totalNet) {
+  if (totalNet === undefined) {
     return '';
   }
 
@@ -67,7 +67,7 @@ type PositionTableProps = LoadingWrapperProps & {
   columnsToShow?: PositionColumnKey[],
   // eslint-disable-next-line react/require-default-props
   className?: string,
-  title: string,
+  title?: string,
   totalPortfolioCost?: number,
   totalPortfolioCostLoading?: boolean,
 };
@@ -79,6 +79,7 @@ PositionsTable.defaultProps = {
   columnsToShow: DEFAULT_COLUMNS,
   totalPortfolioCost: 1,
   totalPortfolioCostLoading: false,
+  title: '',
 };
 
 function PositionsTable({
@@ -119,7 +120,7 @@ function PositionsTable({
 
   const rubPriceRenderer = useCallback<(props: TotalNetRendererProps) => ReactNode>(
     ({rowData, cellData: totalNet}) => {
-      if (!totalNet) {
+      if (totalNet === undefined) {
         return '';
       }
       const totalNetRub = getPriceRub(totalNet, rowData);

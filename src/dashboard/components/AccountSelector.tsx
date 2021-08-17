@@ -1,4 +1,8 @@
-import React, {ChangeEventHandler} from 'react';
+import React from 'react';
+import {
+  Select, MenuItem, InputLabel, FormControl, makeStyles,
+} from '@material-ui/core';
+import {SelectInputProps} from '@material-ui/core/Select/SelectInput';
 
 type DataItem = {
   value: string,
@@ -7,11 +11,21 @@ type DataItem = {
 
 type Props = {
   isDataLoading: boolean,
-  onSelectorChange: ChangeEventHandler<HTMLSelectElement>,
+  onSelectorChange: SelectInputProps['onChange'],
   data: DataItem[],
   selectedValue: string,
   title: string,
 };
+
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 200,
+  },
+  select: {
+    marginTop: theme.spacing(4),
+  },
+}));
 
 function AccountSelector({
   isDataLoading,
@@ -20,26 +34,32 @@ function AccountSelector({
   selectedValue,
   title,
 }: Props) : JSX.Element {
+  const classes = useStyles();
+
   return (
     <>
-      {title}
       {isDataLoading ? (
         <p>Loading</p>
       ) : (
-        <select
-          className="Account-selector"
-          onChange={onSelectorChange}
-        >
-          {data.map(({value, text}) => (
-            <option
-              key={value}
-              value={value}
-              selected={value === selectedValue}
-            >
-              {text}
-            </option>
-          ))}
-        </select>
+        <FormControl className={classes.formControl}>
+          <InputLabel shrink id="account-select-label">{title}</InputLabel>
+          <Select
+            labelId="account-select-label"
+            id="account-select"
+            value={selectedValue}
+            onChange={onSelectorChange}
+            className={classes.select}
+            displayEmpty
+          >
+            {data.map(({value, text}) => (
+              <MenuItem
+                value={value}
+              >
+                {text}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
       )}
     </>
   );
