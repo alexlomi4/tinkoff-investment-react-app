@@ -48,7 +48,7 @@ export default function useSorting<T extends PositionRow>(
   initialSortDirection?: SortDirectionType,
 ): [PositionRow[], PositionKey, SortDirectionType, SortingCallback] {
   const [currentSorting, setCurrentSorting] = useState<PositionKey>(
-    initialSorting || 'name',
+    initialSorting || 'totalNetRub',
   );
   const [currentSortDirection, setSortDirection] = useState<SortDirectionType>(
     initialSortDirection || SortDirection.ASC,

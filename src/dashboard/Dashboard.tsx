@@ -85,15 +85,12 @@ function Dashboard() {
           <PlaygroundTable
             totalPortfolioCostLoading={loadingTotals}
             totalPortfolioCost={portfolioCost}
-            initialSortBy="totalNetRub"
-            initialSortDirection={SortDirection.ASC}
             onLoad={useCallback(() => (
               InvestApiService.getPortfolios(accountId)
             ), [accountId])}
           />
           <PositionsTable
             visibleColumns={HISTORY_COLUMNS}
-            initialSortBy="totalNetRub"
             initialSortDirection={SortDirection.DESC}
             onLoad={useCallback(() => (
               InvestApiService.getHistoricPositions(accountId)
