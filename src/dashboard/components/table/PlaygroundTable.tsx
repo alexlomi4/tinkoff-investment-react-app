@@ -242,22 +242,33 @@ function PlaygroundTable({
     Number(cellData) - Number(sortedData[rowIndex][dataKey]),
   ) >= 1e-2, [sortedData]);
 
-  const renderEditableCell = useCallback((cellRenderer?: TableCellRenderer) => ({
-    cellData, rowIndex, dataKey, ...rest
-  }: TableCellProps) => (
-    <EditableCellRenderer
-      cellData={cellData}
-      rowIndex={rowIndex}
-      dataKey={dataKey}
-      /* eslint-disable-next-line react/jsx-props-no-spreading */
-      {...rest}
-      isEditable={editableCells[rowIndex] && editableCells[rowIndex][dataKey as PositionKey]}
-      isChanged={isCellChanged(cellData, rowIndex, dataKey as PositionKey)}
-      onEditStateChange={updateEditableCells}
-      onCellChange={updateChangedData}
-      cellRenderer={cellRenderer}
-    />
-  ), [editableCells, isCellChanged, updateChangedData, updateEditableCells]);
+  const renderEditableCell = useCallback((cellRenderer?: TableCellRenderer) => (
+    props: TableCellProps,
+  ) => {
+    const {
+      cellData,
+      rowIndex,
+      dataKey,
+      rowData,
+    } = props;
+
+    if (rowData.instrumentType === 'Currency') {
+      return cellRenderer ? cellRenderer(props) : cellData;
+    }
+
+    return (
+      <EditableCellRenderer
+          /* eslint-disable-next-line react/jsx-props-no-spreading */
+        {...props}
+          // TODO replace with figi
+        isEditable={editableCells[rowIndex] && editableCells[rowIndex][dataKey as PositionKey]}
+        isChanged={isCellChanged(cellData, rowIndex, dataKey as PositionKey)}
+        onEditStateChange={updateEditableCells}
+        onCellChange={updateChangedData}
+        cellRenderer={cellRenderer}
+      />
+    );
+  }, [editableCells, isCellChanged, updateChangedData, updateEditableCells]);
 
   const columnConfigs = useMemo<ColumnConfig[]>(() => [
     {key: '#'},
