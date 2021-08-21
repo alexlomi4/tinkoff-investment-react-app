@@ -19,7 +19,7 @@ if (isProd) {
 
 type BrokerAccountId = string;
 
-const responseConverter = ({data}: {data: any}) => data;
+const responseConverter = <T>({data}: {data: T}) => data;
 
 function convertPositionsToRows(portfolios: PositionMap): PositionRow[] {
   if (!portfolios) {
@@ -50,10 +50,10 @@ function convertPositionsToRows(portfolios: PositionMap): PositionRow[] {
       : lastPrice;
 
     return {
+      figi,
       name,
       instrumentType,
       lastPrice,
-      totalPrice: totalBalance * lastPrice,
       totalBalance,
       totalNet,
       totalNetPercent: accountPositions[0].netPercent,
@@ -61,6 +61,8 @@ function convertPositionsToRows(portfolios: PositionMap): PositionRow[] {
       totalOperationsCost,
       buyCostTotal,
       currency,
+      portfolioPercent: null,
+      totalNetRub: null,
     };
   });
 }

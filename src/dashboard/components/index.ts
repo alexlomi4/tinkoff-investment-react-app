@@ -1,4 +1,5 @@
 import AccountSelector from './AccountSelector';
-import PositionsTable from './PositionsTable';
+import PositionsTable from './table/PositionsTable';
+import PlaygroundTable from './table/PlaygroundTable';
 
-export {AccountSelector, PositionsTable};
+export {AccountSelector, PositionsTable, PlaygroundTable};

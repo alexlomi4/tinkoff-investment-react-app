@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import {Currency} from '@tinkoff/invest-openapi-js-sdk';
+import {Currency, InstrumentType} from '@tinkoff/invest-openapi-js-sdk';
 
 export declare type LoadingWrapperProps = {
   loading: boolean,
@@ -7,8 +7,9 @@ export declare type LoadingWrapperProps = {
 };
 
 export declare type PositionRow = {
+  figi: string,
   name: string,
-  instrumentType: string,
+  instrumentType: InstrumentType,
   lastPrice?: number,
   totalBalance: number,
   totalNet: number,
@@ -16,9 +17,10 @@ export declare type PositionRow = {
   totalOperationsCost: number,
   buyCostTotal: number,
   currency: Currency | undefined,
-  totalPrice: number,
   totalNetPercent: number;
+  portfolioPercent: number | null,
+  totalNetRub: number | null,
 };
 
 export declare type PositionKey = keyof PositionRow;
-export declare type PositionColumn = PositionKey | '#';
+export declare type PositionColumn = PositionKey | '#' | 'toolbar';

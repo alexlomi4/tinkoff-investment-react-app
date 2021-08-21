@@ -28,5 +28,6 @@ module.exports = {
     "react-hooks/exhaustive-deps": "error", // Checks effect dependencies
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": ["error", {functions: false}],
+    "react/require-default-props": "off"
   },
 };

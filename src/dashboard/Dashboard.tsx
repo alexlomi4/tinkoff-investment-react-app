@@ -4,15 +4,16 @@ import React, {
 // eslint-disable-next-line import/no-extraneous-dependencies
 import {UserAccount} from '@tinkoff/invest-openapi-js-sdk';
 import {createTheme, ThemeProvider} from '@material-ui/core';
+import {SortDirection} from 'react-virtualized';
 import InvestApiService, {
 } from '../service/InvestApiService';
 import useGetData from '../generic/hooks/useGetData';
 import LoadingWrapper from '../generic/components/LoadingWrapper';
-import {PositionsTable, AccountSelector} from './components/index';
-import {PositionColumn} from '../@types';
+import {PositionsTable, AccountSelector, PlaygroundTable} from './components/index';
 import {Totals} from '../@types/server';
 import {formatPrice} from '../generic/utils';
 import TabWrapper from '../generic/components/TabPanel';
+import {PositionColumn} from '../@types';
 
 const HISTORY_COLUMNS: PositionColumn[] = [
   '#',
@@ -20,6 +21,7 @@ const HISTORY_COLUMNS: PositionColumn[] = [
   'instrumentType',
   'lastPrice',
   'totalNet',
+  'totalNetRub',
 ];
 
 const darkTheme = createTheme({
@@ -71,7 +73,7 @@ function Dashboard() {
         />
         <TabWrapper
           label="position tabs"
-          tabLabels={['Current positions', 'Position history']}
+          tabLabels={['Current positions', 'Playground', 'Position History']}
         >
           <PositionsTable
             totalPortfolioCostLoading={loadingTotals}
@@ -80,8 +82,19 @@ function Dashboard() {
               InvestApiService.getPortfolios(accountId)
             ), [accountId])}
           />
+          <PlaygroundTable
+            totalPortfolioCostLoading={loadingTotals}
+            totalPortfolioCost={portfolioCost}
+            initialSortBy="totalNetRub"
+            initialSortDirection={SortDirection.ASC}
+            onLoad={useCallback(() => (
+              InvestApiService.getPortfolios(accountId)
+            ), [accountId])}
+          />
           <PositionsTable
-            columnsToShow={HISTORY_COLUMNS}
+            visibleColumns={HISTORY_COLUMNS}
+            initialSortBy="totalNetRub"
+            initialSortDirection={SortDirection.DESC}
             onLoad={useCallback(() => (
               InvestApiService.getHistoricPositions(accountId)
             ), [accountId])}
