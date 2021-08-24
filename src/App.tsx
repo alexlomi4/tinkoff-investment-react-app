@@ -2,7 +2,7 @@ import './App.css';
 import React, { useCallback, useState } from 'react';
 import Dashboard from './dashboard/Dashboard';
 import LoginForm from './login/LoginForm';
-import InvestApiService from './service/InvestApiService';
+import {InvestApiService} from './service';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);

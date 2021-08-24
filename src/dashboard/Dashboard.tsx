@@ -5,8 +5,7 @@ import React, {
 import {UserAccount} from '@tinkoff/invest-openapi-js-sdk';
 import {createTheme, ThemeProvider} from '@material-ui/core';
 import {SortDirection} from 'react-virtualized';
-import InvestApiService, {
-} from '../service/InvestApiService';
+import {InvestApiService} from '../service';
 import useGetData from '../generic/hooks/useGetData';
 import LoadingWrapper from '../generic/components/LoadingWrapper';
 import {PositionsTable, AccountSelector, PlaygroundTable} from './components/index';

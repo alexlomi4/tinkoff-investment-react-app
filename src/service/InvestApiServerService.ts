@@ -6,16 +6,9 @@ import {PositionRow} from '../@types';
 
 const isProd = true;
 
-let instance: AxiosInstance;
-if (isProd) {
-  instance = axios.create({
-    baseURL: 'http://localhost:5000/investment/prod',
-  });
-} else {
-  instance = axios.create({
-    baseURL: 'http://localhost:5000/investment/sandbox',
-  });
-}
+const instance: AxiosInstance = axios.create({
+  baseURL: `http://localhost:5000/investment/${isProd ? 'prod' : 'sandbox'}`,
+});
 
 type BrokerAccountId = string;
 
@@ -67,7 +60,7 @@ function convertPositionsToRows(portfolios: PositionMap): PositionRow[] {
   });
 }
 
-export default class InvestApiService {
+export default class InvestApiServerService {
   static setToken(token: string) {
     instance.defaults.headers.common.Authorization = `Bearer ${token}`;
   }
@@ -94,7 +87,7 @@ export default class InvestApiService {
     return instance.get('/accounts').then(responseConverter);
   }
 
-  static async getCurrencyInfos(currenciesList: string[]): Promise<CurrencyInfo[]> {
+  static async getCurrencyInfo(currenciesList: string[]): Promise<CurrencyInfo[]> {
     if (!Array.isArray(currenciesList)) {
       return Promise.resolve([]);
     }

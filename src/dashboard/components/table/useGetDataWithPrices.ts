@@ -4,7 +4,7 @@ import {Currency} from '@tinkoff/invest-openapi-js-sdk';
 import {PositionRow} from '../../../@types';
 import useGetData from '../../../generic/hooks/useGetData';
 import {CurrencyInfo} from '../../../@types/server';
-import InvestApiService from '../../../service/InvestApiService';
+import {InvestApiService} from '../../../service';
 
 type RubPriceConverter = (
   {cellData, rowData}: {cellData: number, rowData: PositionRow}
@@ -39,7 +39,7 @@ export default function useGetDataWithPrices(
 
   const [pricesInfo, pricesLoading] = useGetData<CurrencyInfo[]>(
     useCallback(() => (
-      InvestApiService.getCurrencyInfos(currencies)
+      InvestApiService.getCurrencyInfo(currencies)
     ), [currencies]),
     [],
   );
