@@ -12,6 +12,7 @@
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
     "react-virtualized": "^9.22.3",
+    "tinkoff-investment-aggregate-service": "git+https://github.com/alexlomi4/tinkoff-investment-aggregate-service.git",
     "web-vitals": "^1.0.1"
   },
   "scripts": {

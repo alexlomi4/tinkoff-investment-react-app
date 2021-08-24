@@ -1,7 +1,7 @@
 import InvestApiServerService from './InvestApiServerService';
 import InvestApiClientService from './client/InvestApiClientService';
 
-const isClient = false;
+const isClient = true;
 const InvestApiServiceClient = isClient
   ? InvestApiClientService
   : InvestApiServerService;

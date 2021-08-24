@@ -14,7 +14,7 @@ type BrokerAccountId = string;
 
 const responseConverter = <T>({data}: {data: T}) => data;
 
-function convertPositionsToRows(portfolios: PositionMap): PositionRow[] {
+export function convertPositionsToRows(portfolios: PositionMap): PositionRow[] {
   if (!portfolios) {
     return [];
   }
