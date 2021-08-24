@@ -2,6 +2,7 @@
 
 React app to aggregate investment statistics
 
-<img src="https://user-images.githubusercontent.com/12560043/129790529-88978a1c-60f2-43eb-bcb1-d523004947d7.png" height="550">
+
+<img src="https://user-images.githubusercontent.com/12560043/130585257-97d44615-2e02-4e27-8406-951935ec454d.png">
 
 
