@@ -19,9 +19,9 @@ export function NetRenderer({
 
   return (
     <div className={totalNet < 0 ? 'Loss-net' : 'Profit-net'}>
-      {`${formatPrice(totalNet, currency)} (${formatPrice(
+      {`${formatPrice(totalNet, currency)} ${totalNet !== 0 ? `(${formatPrice(
         Math.sign(totalNet) * rowData.totalNetPercent,
-      )}%)`}
+      )}%)` : ''}`}
     </div>
   );
 }

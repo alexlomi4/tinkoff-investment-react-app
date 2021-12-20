@@ -31,7 +31,9 @@ const darkTheme = createTheme({
 
 function Dashboard() {
   const [accounts, accsLoading] = useGetData<UserAccount[]>(
-    InvestApiService.getAccounts,
+    useCallback(() => (
+      InvestApiService.getAccounts()
+    ), []),
     [],
   );
   const [accountId, setAccountId] = useState<string>('');

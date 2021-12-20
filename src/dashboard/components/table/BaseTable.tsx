@@ -102,7 +102,7 @@ function BaseTable({
       >
         {renderColumn(
           <Column
-            width={50}
+            width={70}
             label="#"
             dataKey="#"
             className="Index-column"
@@ -184,7 +184,7 @@ function BaseTable({
         )}
         {renderColumn(
           <Column
-            width={280}
+            width={300}
             label="Net RUB"
             dataKey="totalNetRub"
             headerRenderer={headerRenderer}
